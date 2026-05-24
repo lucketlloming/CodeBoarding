@@ -45,8 +45,9 @@ class IncrementalAnalysisController:
     incremental changes in large repositories.
     """
 
-    # Moved state file to project root level to avoid cluttering .codeboarding dir
-    STATE_FILE = ".incremental_state.json"
+    # Keeping state file inside .codeboarding dir to keep repo root clean.
+    # Changed from the upstream default of ".incremental_state.json" at root.
+    STATE_FILE = ".codeboarding/.incremental_state.json"
 
     def __init__(self, repo_root: str, state_file: Optional[str] = None):
         self.repo_root = Path(repo_root)
@@ -83,5 +84,4 @@ class IncrementalAnalysisController:
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
         data = {
             "snapshots": {
-                path: vars(snap)
-                for path, snap in self._stat
+        
