@@ -81,7 +81,5 @@ class IncrementalAnalysisController:
 
     def save_state(self) -> None:
         """Persist current incremental state to disk."""
+        # Use exist_ok=True so we don't crash if the directory already exists.
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
-        data = {
-            "snapshots": {
-        
